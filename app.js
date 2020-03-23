@@ -40,13 +40,13 @@ app.listen(8000, () => {
 app.get("/cipher", (req, res) => {
   const { text, shift } = req.query;
 
-  if (!text) {
-    return res.status(400).send("text is required!");
-  }
+    if (!text) {
+      return res.status(400).send("text is required!");
+    }
 
-  if (!shift) {
-    return res.status(400).send("shift is required");
-  }
+    if (!shift) {
+      return res.status(400).send("shift is required");
+    }
 
   const numShift = parseFloat(shift);
   if (Number.isNaN(numShift)) {
@@ -72,4 +72,67 @@ app.get("/cipher", (req, res) => {
     .join(" ");
   res.status(200).send(cipher);
 });
-//
+
+//drill 3
+
+app.get("/lotto", (req, res) => {
+
+  const { numbers } = req.query;
+  const randomGeneratedNumbers = [...Array(6)].map(() => Math.floor(Math.random() * 20));
+
+console.log(randomGeneratedNumbers);
+  if(!numbers) {
+    return res
+      .status(400)
+      .send("numbers is required");
+  }
+
+  if(numbers.length >= 6) {
+    return res.status(400).send("Please insert 6 numbers or less")
+  }
+
+  for(let i=0; i<numbers.length; i++) {
+    if(numbers[i] >= 20 || numbers < 0) {
+      return res.status(400).send("All numbers need to be less than 20")
+    }
+  }
+
+
+  const guesses = numbers.map(n => parseInt(n))
+  .filter(n => !Number.isNaN(n) && (n >= 1 && n <= 20));
+  
+  console.log(guesses);
+ 
+  let diff = randomGeneratedNumbers.filter(n => !guesses.includes(n));
+
+
+
+
+  let responseText;
+
+  switch(diff.length){
+    case 0: 
+      responseText = 'Wow! Unbelievable! You could have won the mega millions!';
+      break;
+    case 1:   
+      responseText = 'Congratulations! You win $100!';
+      break;
+    case 2:
+      responseText = 'Congratulations, you win a free ticket!';
+      break;
+    default:
+      responseText = 'Sorry, you lose';  
+  }
+
+  res.json({
+    numbers,
+    randomGeneratedNumbers,
+    diff,
+    responseText
+  })
+
+  res.status(200);
+  res.send(responseText);
+})
+
+
