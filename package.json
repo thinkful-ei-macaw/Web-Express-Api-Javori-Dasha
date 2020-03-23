@@ -1,0 +1,28 @@
+{
+  "name": "web-express-api-javori-dasha",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemo": "^1.0.0"
+  },
+  "scripts": {
+    "start": "node app",
+    "dev": "nodemon app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thinkful-ei-macaw/Web-Express-Api-Javori-Dasha.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thinkful-ei-macaw/Web-Express-Api-Javori-Dasha/issues"
+  },
+  "homepage": "https://github.com/thinkful-ei-macaw/Web-Express-Api-Javori-Dasha#readme"
+}
